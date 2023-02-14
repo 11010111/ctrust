@@ -1,5 +1,5 @@
 // functions
 
-@function rem($px, $rembase: 18) {
+@function rem($px, $rembase: 16) {
     @return calc($px / $rembase)+#{rem};
 }
