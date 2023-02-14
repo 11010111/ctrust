@@ -1,0 +1,265 @@
+// ctrust
+@import "functions";
+
+// :root {
+//     --ctrust-bg: rgba(40, 44, 50, 0.8);
+//     --ctrust-banner-bg: #282c32;
+//     --ctrust-banner-fg: #ffffff;
+//     --ctrust-check-bg: #ffffff;
+//     --ctrust-check-border: #60656c;
+//     --ctrust-check-checked: #43903a;
+//     --ctrust-check-disabled: #60656c;
+//     --ctrust-descr-bg: #323232;
+//     --ctrust-descr-fg: #9d9d9d;
+//     --ctrust-selectedbtn-border: #323232;
+//     --ctrust-selectedbtn-bg: #43903a;
+//     --ctrust-selectedbtn-fg: #151515;
+//     --ctrust-allbtn-border: #323232;
+//     --ctrust-allbtn-bg: #ffffff;
+//     --ctrust-allbtn-fg: #000000;
+//     --ctrust-info-stroke: #ffffff;
+//     --ctrust-fingerprint-bg: #282c32;
+//     --ctrust-fingerprint-stroke: #ffffff;
+//     --ctrust-fingerprint-stroke-hover: #43903a;
+//     --ctrust-wrapper-bg: #000000;
+//     --ctrust-wrapper-fg: #ffffff;
+// }
+
+.ctrust {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--ctrust-bg, rgba(40, 44, 50, 0.8));
+    z-index: 9999;
+
+    .ctrust-banner {
+        position: fixed;
+        bottom: rem(18);
+        right: rem(18);
+        display: grid;
+        row-gap: rem(36);
+        background-color: var(--ctrust-banner-bg, #282c32);
+        color: var(--ctrust-banner-fg, #ffffff);
+        width: calc(100% - rem(36));
+        max-width: rem(540);
+        max-height: calc(100% - rem(36));
+        padding: rem(27) rem(36);
+        border-radius: rem(3);
+        overflow-y: auto;
+
+        .ctrust-intro {
+            h1, h2, h3, h4, h5, h6 {
+                margin: 0 0 rem(18);
+            }
+
+            p {
+                margin: 0 0 rem(18);
+            }
+
+            p:last-of-type {
+                margin: 0;
+            }
+        }
+
+        .ctrust-elements-wrapper {
+            display: grid;
+            row-gap: rem(9);
+
+            .ctrust-element {
+                display: grid;
+                row-gap: rem(9);
+
+                .ctrust-head {
+                    display: grid;
+                    grid-template-columns: rem(18) 1fr rem(18);
+                    align-items: center;
+                    column-gap: rem(18);
+
+                    input {
+                        appearance: none;
+                        display: grid;
+                        place-content: center;
+                        margin: 0;
+                        padding: 0;
+                        background-color: var(--ctrust-check-bg, #ffffff);
+                        border: rem(2) solid var(--ctrust-check-border, #60656c);
+                        border-radius: rem(2);
+                        width: rem(27);
+                        height: rem(27);
+                        cursor: pointer;
+
+                        &::after {
+                            content: "";
+                            width: rem(15);
+                            height: rem(15);
+                            transform: scale(0);
+                            transition: 0.12s transform ease-in-out;
+                            background-color: var(--ctrust-check-checked, #43903a);
+                        }
+
+                        &:checked {
+                            &::after {
+                                transform: scale(1);
+                            }
+                        }
+
+                        &:disabled {
+                            border: rem(2) solid var(--ctrust-check-border, #60656c);
+                            cursor: unset;
+
+                            &::after {
+                                background-color: var(--ctrust-check-disabled, #60656c);
+                            }
+                        }
+                    }
+
+                    .ctrust-info {
+                        position: relative;
+                        width: rem(22);
+                        height: rem(22);
+                        cursor: pointer;
+
+                        svg {
+                            width: rem(22);
+                            height: rem(22);
+
+                            path {
+                                stroke: var(--ctrust-info-stroke, #ffffff);
+                            }
+                        }
+                    }
+                }
+
+                .ctrust-description {
+                    display: none;
+                    background-color: var(--ctrust-descr-bg, #323232);
+                    color: var(--ctrust-descr-fg, #9d9d9d);
+                    padding: rem(15);
+                    font-size: rem(15);
+                    border-radius: rem(2);
+                }
+
+                .ctrust-descr-show {
+                    display: block;
+                }
+            }
+        }
+
+        .ctrust-actions {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            flex-wrap: wrap;
+            column-gap: rem(9);
+            row-gap: rem(9);
+
+            .ctrust-selected {
+                border-radius: rem(3);
+                border: rem(1) solid var(--ctrust-selectedbtn-border, #323232);
+                padding: rem(9) rem(18);
+                background-color: var(--ctrust-selectedbtn-bg, #43903a);
+                color: var(--ctrust-selectedbtn-fg, #151515);
+                cursor: pointer;
+
+                @media not screen and (min-width: 768px) {
+                    width: 100%;
+                    text-align: center;
+                }
+            }
+
+            .ctrust-all {
+                border-radius: rem(3);
+                border: rem(1) solid var(--ctrust-allbtn-border, #323232);
+                background-color: var(--ctrust-allbtn-bg, #ffffff);
+                color: var(--ctrust-allbtn-fg, #000000);
+                padding: rem(9) rem(18);
+                cursor: pointer;
+
+                @media not screen and (min-width: 768px) {
+                    width: 100%;
+                    text-align: center;
+                }
+            }
+        }
+    }
+}
+
+.ctrust-show {
+    display: block;
+}
+
+.ctrust-fingerprint {
+    position: fixed;
+    left: 0;
+    bottom: rem(18);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: rem(6) rem(9) rem(6) rem(18);
+    background-color: var(--ctrust-fingerprint-bg, #282c32);
+    border-top-right-radius: rem(3);
+    border-bottom-right-radius: rem(3);
+    cursor: pointer;
+    transition: padding 0.125s ease-in-out;
+    z-index: 9998;
+
+    &:hover {
+        padding: rem(6) rem(9) rem(6) rem(27);
+
+        svg path {
+            stroke: var(----ctrust-fingerprint-stroke-hover, #43903a);
+        }
+    }
+
+    svg {
+        width: rem(24);
+        height: rem(24);
+
+        path {
+            stroke: var(--ctrust-fingerprint-stroke, #ffffff);
+        }
+    }
+}
+
+.ctrust-wrapper {
+    display: flex;
+    position: relative;
+    background-color: transparent;
+    cursor: pointer;
+
+    iframe, img, video, audio {
+        position: relative;
+        z-index: -1;
+    }
+
+    &::after {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: calc(100% - rem(36));
+        height: calc(100% - rem(36));
+        background-color: var(--ctrust-wrapper-bg, #000000);
+        color: var(--ctrust-wrapper-fg, #ffffff);
+        padding: rem(18);
+        z-index: -1;
+    }
+}
+
+.ctrust-wrapper:lang(en) {
+    &::after {
+        content: "External media has been blocked.";
+    }
+}
+
+.ctrust-wrapper:lang(de) {
+    &::after {
+        content: "Externe Medien wurden blockiert.";
+    }
+}

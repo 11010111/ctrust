@@ -1,0 +1,17 @@
+{
+  "name": "ctrust",
+  "version": "1.0.0",
+  "description": "CTrust - Cookie Banner Library",
+  "private": "true",
+  "main": "ctrust-setup.js",
+  "scripts": {
+    "minify": "uglifyjs ctrust.js -c toplevel,sequences=false > ctrust.min.js",
+    "watch": "sass . --watch --no-source-map --style=compressed"
+  },
+  "author": "Konstantin Schneider",
+  "license": "ISC",
+  "devDependencies": {
+    "sass": "^1.58.1",
+    "uglifyjs": "^2.4.11"
+  }
+}
