@@ -5,7 +5,7 @@
   "private": "true",
   "main": "ctrust-setup.js",
   "scripts": {
-    "minify": "uglifyjs ctrust.js -c toplevel,sequences=false > ctrust.min.js",
+    "minify": "uglifyjs ctrust.js > ctrust.min.js",
     "watch": "sass . --watch --no-source-map --style=compressed"
   },
   "author": "Konstantin Schneider",
