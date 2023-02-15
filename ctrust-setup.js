@@ -1,8 +1,4 @@
-import CTrust, { setCookie, addHost, allow, block, options } from './ctrust.min.js'
-
-window.ctrust = []
-window.ctrust.allow = allow
-window.ctrust.setCookie = setCookie
+import CTrust, { addHost, allow, block, options } from './ctrust.min.js'
 
 //addHost('https://www.youtube-nocookie.com')
 
@@ -18,7 +14,13 @@ extendOptions.cookies.push(
 			de: 'Dies ist meine Externe Medien Beschreibung.'
 		},
 		checked: true,
-		script: 'window.ctrust.allow(); //window.ctrust.allow("video")',
+		script: () => {
+            setTimeout(() => {
+				allow()
+				//allow("video")
+				console.log('Extern Media loaded.')
+			},100)
+		},
 		keys: '_none'
 	}
 )

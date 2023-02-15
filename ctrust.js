@@ -1,5 +1,7 @@
 // CookieTrust
 
+const hosts = []
+
 const options = {
     intro: {
         en: [
@@ -23,7 +25,9 @@ const options = {
             },
             checked: true,
             disabled: true,
-            script: 'console.log("Necessary function loaded.")',
+            script: () => {
+                console.log("Necessary loaded.")
+            },
             keys: '_none'
         }
     ],
@@ -80,14 +84,7 @@ const isCookieSet = (name) => {
 }
 
 const addHost = (host) => {
-    if (window.ctrust !== undefined) {
-        if (window.ctrust.hosts !== undefined) {
-            window.ctrust.hosts.push(host)
-        } else {
-            window.ctrust.hosts = []
-            window.ctrust.hosts.push(host)
-        }
-    }
+    hosts.push(host)
 }
 
 const wrap = (element) => {
@@ -106,13 +103,11 @@ const wrap = (element) => {
 const isAllowedHost = (src) => {
     let tmp = false
 
-    if (window.ctrust !== undefined && window.ctrust.hosts !== undefined) {
-        window.ctrust.hosts.forEach(host => {
-            if (src.indexOf(host) >= 0) {
-                tmp = true
-            }
-        })
-    }
+    hosts.forEach(host => {
+        if (src.indexOf(host) >= 0) {
+            tmp = true
+        }
+    })
 
     return tmp
 }
@@ -198,14 +193,14 @@ const CTrust = (options) => {
     const banner = document.createElement('div')
     banner.className = 'ctrust-banner'
 
-    if (options.intro) {
+    if (options.hasOwnProperty('intro')) {
         const intro = document.createElement('div')
         intro.className = 'ctrust-intro'
         intro.innerHTML = options.intro.hasOwnProperty(lang) ? options.intro[lang].join('') : options.intro['en'].join('')
         banner.appendChild(intro)
     }
 
-    if (options.cookies) {
+    if (options.hasOwnProperty('cookies')) {
         const cookiesContainer = document.createElement('div')
         cookiesContainer.className = 'ctrust-elements-wrapper'
 
@@ -217,19 +212,26 @@ const CTrust = (options) => {
             head.className = 'ctrust-head'
 
             const label = document.createElement('label')
-            label.innerText = cookie.title.hasOwnProperty(lang) ? cookie.title[lang] : cookie.title['en']
+
+            if (cookie.hasOwnProperty('title')) {
+                label.innerText = cookie.title.hasOwnProperty(lang) ? cookie.title[lang] : cookie.title['en']
+            }
+            
             label.htmlFor = 'ck' + index
 
             const check = document.createElement('input')
             check.type = 'checkbox'
             check.id = 'ck' + index
-            check.disabled = cookie.disabled ? true : false
+
+            if (cookie.hasOwnProperty('disabled')) {
+                check.disabled = cookie.disabled ? true : false
+            }
 
             const status = window.localStorage.getItem('_ct' + index)
 
             if (status) {
                 check.checked =  status === 'true' ? true : false
-            } else {
+            } else if (cookie.hasOwnProperty('checked')) {
                 check.checked =  cookie.checked
                 window.localStorage.setItem('_ct' + index, cookie.checked || 'false')
             }
@@ -246,7 +248,7 @@ const CTrust = (options) => {
             head.appendChild(label)
             element.appendChild(head)
 
-            if (cookie.description) {
+            if (cookie.hasOwnProperty('description')) {
                 const description = document.createElement('div')
                 description.className = 'ctrust-description'
                 description.innerHTML = cookie.description.hasOwnProperty(lang) ? cookie.description[lang] : cookie.description['en']
@@ -274,31 +276,31 @@ const CTrust = (options) => {
 
     const saveAction = document.createElement('button')
     saveAction.className = 'ctrust-selected'
-    saveAction.innerText = options.actions.acceptSelected.hasOwnProperty(lang) ? options.actions.acceptSelected[lang] : options.actions.acceptSelected['en']
+
+    if (options.hasOwnProperty('actions') && options.actions.hasOwnProperty('acceptSelected')) {
+        saveAction.innerText = options.actions.acceptSelected.hasOwnProperty(lang) ? options.actions.acceptSelected[lang] : options.actions.acceptSelected['en']
+    }
 
     saveAction.addEventListener('click', () => {
-        if (options.cookies) {
+        if (options.hasOwnProperty('cookies')) {
             options.cookies.forEach((cookie, index) => {
                 const status = window.localStorage.getItem('_ct' + index)
     
                 if (status === 'true') {
-                    const script = document.querySelector('#ct' + index)
+                    const loaded = container.getAttribute('data-ct' + index)
     
-                    if (!script) {
-                        const script = document.createElement('script')
-                        script.id = 'ct' + index
-                        script.type = 'module'
-                        script.innerHTML = cookie.script
-                        document.body.appendChild(script)
+                    if (!loaded && cookie.hasOwnProperty('script') && typeof cookie.script === 'function') {
+                        container.setAttribute('data-ct' + index, true)
+                        cookie.script()
                     }
                 } else {
-                    const script = document.querySelector('#ct' + index)
-    
-                    if (script) {
-                        script.remove()
+                    const loaded = container.getAttribute('data-ct' + index)
+
+                    if (loaded) {
+                        container.setAttribute('data-ct' + index, '')
                         window.localStorage.setItem('_ctr', new Date())
 
-                        if (cookie.keys) {
+                        if (cookie.hasOwnProperty('keys')) {
                             const keys = cookie.keys.split(',')
 
                             keys.forEach(key => {
@@ -321,10 +323,13 @@ const CTrust = (options) => {
 
     const allAction = document.createElement('button')
     allAction.className = 'ctrust-all'
-    allAction.innerText = options.actions.acceptAll.hasOwnProperty(lang) ? options.actions.acceptAll[lang] : options.actions.acceptAll['en']
+
+    if (options.hasOwnProperty('actions') && options.actions.hasOwnProperty('acceptAll')) {
+        allAction.innerText = options.actions.acceptAll.hasOwnProperty(lang) ? options.actions.acceptAll[lang] : options.actions.acceptAll['en']
+    }
 
     allAction.addEventListener('click', () => {
-        if (options.cookies) {
+        if (options.hasOwnProperty('cookies')) {
             options.cookies.forEach((cookie, index) => {
                 const check = document.querySelector('#ck' + index)
     
@@ -332,14 +337,11 @@ const CTrust = (options) => {
                     check.checked = true
                     window.localStorage.setItem('_ct' + index, 'true')
     
-                    const script = document.querySelector('#ct' + index)
-    
-                    if (!script) {
-                        const script = document.createElement('script')
-                        script.id = 'ct' + index
-                        script.type = 'module'
-                        script.innerHTML = cookie.script
-                        document.body.appendChild(script)
+                    const loaded = container.getAttribute('data-ct' + index)
+
+                    if (!loaded && cookie.hasOwnProperty('script') && typeof cookie.script === 'function') {
+                        container.setAttribute('data-ct' + index, true)
+                        cookie.script()
                     }
                 }
             })
