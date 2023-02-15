@@ -80,8 +80,8 @@
 
                         &::after {
                             content: "";
-                            width: var(--ctrust-check-after-width, 0.83em);
-                            height: var(--ctrust-check-after-height, 0.83em);
+                            width: var(--ctrust-check-after-width, 1em);
+                            height: var(--ctrust-check-after-height, 1em);
                             transform: scale(0);
                             transition: 0.12s transform ease-in-out;
                             background-color: var(--ctrust-check-checked, #43903a);
