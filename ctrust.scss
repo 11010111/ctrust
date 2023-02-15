@@ -1,30 +1,6 @@
 // ctrust
 @import "functions";
 
-// :root {
-//     --ctrust-bg: rgba(40, 44, 50, 0.8);
-//     --ctrust-banner-bg: #282c32;
-//     --ctrust-banner-fg: #ffffff;
-//     --ctrust-check-bg: #ffffff;
-//     --ctrust-check-border: #60656c;
-//     --ctrust-check-checked: #43903a;
-//     --ctrust-check-disabled: #60656c;
-//     --ctrust-descr-bg: #323232;
-//     --ctrust-descr-fg: #9d9d9d;
-//     --ctrust-selectedbtn-border: #323232;
-//     --ctrust-selectedbtn-bg: #43903a;
-//     --ctrust-selectedbtn-fg: #151515;
-//     --ctrust-allbtn-border: #323232;
-//     --ctrust-allbtn-bg: #ffffff;
-//     --ctrust-allbtn-fg: #000000;
-//     --ctrust-info-stroke: #ffffff;
-//     --ctrust-fingerprint-bg: #282c32;
-//     --ctrust-fingerprint-stroke: #ffffff;
-//     --ctrust-fingerprint-stroke-hover: #43903a;
-//     --ctrust-wrapper-bg: #000000;
-//     --ctrust-wrapper-fg: #ffffff;
-// }
-
 .ctrust {
     display: none;
     position: fixed;
@@ -32,51 +8,62 @@
     left: 0;
     right: 0;
     bottom: 0;
+    font-size: 16px;
     background-color: var(--ctrust-bg, rgba(40, 44, 50, 0.8));
     z-index: 9999;
 
     .ctrust-banner {
         position: fixed;
-        bottom: rem(18);
-        right: rem(18);
+        bottom: var(--ctrust-banner-bottom, 1.25em);
+        right: var(--ctrust-banner-right, 1.25em);
         display: grid;
-        row-gap: rem(36);
+        row-gap: var(--ctrust-banner-rowgap, 2em);
         background-color: var(--ctrust-banner-bg, #282c32);
         color: var(--ctrust-banner-fg, #ffffff);
-        width: calc(100% - rem(36));
-        max-width: rem(540);
-        max-height: calc(100% - rem(36));
-        padding: rem(27) rem(36);
-        border-radius: rem(3);
+        width: var(--ctrust-banner-width, calc(100% - 2em));
+        max-width: var(--ctrust-banner-mw, rem(540));
+        max-height: var(--ctrust-banner-mh, calc(100% - 2em));
+        padding: var(--ctrust-banner-padding, 1.5em 2em);
+        border-radius: var(--ctrust-banner-br, rem(3));
         overflow-y: auto;
 
         .ctrust-intro {
             h1, h2, h3, h4, h5, h6 {
-                margin: 0 0 rem(18);
+                margin: var(--ctrust-intro-h-margin, 0 0 1.5rem);
             }
 
             p {
-                margin: 0 0 rem(18);
+                line-height: 150%;
+                margin: var(--ctrust-intro-p-margin, 0 0 1rem);
             }
 
             p:last-of-type {
                 margin: 0;
             }
+
+            a {
+                text-decoration: none;
+                color: var(--ctrust-intro-link-color, #43903a);
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
         }
 
         .ctrust-elements-wrapper {
             display: grid;
-            row-gap: rem(9);
+            row-gap: var(--ctrust-ew-rowgap, 0.5em);
 
             .ctrust-element {
                 display: grid;
-                row-gap: rem(9);
+                row-gap: var(--ctrust-el-rowgap, 0.5em);
 
                 .ctrust-head {
                     display: grid;
-                    grid-template-columns: rem(18) 1fr rem(18);
+                    grid-template-columns: var(--ctrust-head-gtc, 1.5em 1fr 1.5em);
                     align-items: center;
-                    column-gap: rem(18);
+                    column-gap: var(--ctrust-head-columngap, 1em);
 
                     input {
                         appearance: none;
@@ -85,16 +72,16 @@
                         margin: 0;
                         padding: 0;
                         background-color: var(--ctrust-check-bg, #ffffff);
-                        border: rem(2) solid var(--ctrust-check-border, #60656c);
-                        border-radius: rem(2);
-                        width: rem(27);
-                        height: rem(27);
+                        border: var(--ctrust-check-border, rem(2) solid #60656c);
+                        border-radius: var(--ctrust-check-br, rem(2));
+                        width: var(--ctrust-check-width, 1.5em);
+                        height: var(--ctrust-check-height, 1.5em);
                         cursor: pointer;
 
                         &::after {
                             content: "";
-                            width: rem(15);
-                            height: rem(15);
+                            width: var(--ctrust-check-after-width, 0.83em);
+                            height: var(--ctrust-check-after-height, 0.83em);
                             transform: scale(0);
                             transition: 0.12s transform ease-in-out;
                             background-color: var(--ctrust-check-checked, #43903a);
@@ -107,7 +94,7 @@
                         }
 
                         &:disabled {
-                            border: rem(2) solid var(--ctrust-check-border, #60656c);
+                            border: var(--ctrust-check-border, rem(2) solid #60656c);
                             cursor: unset;
 
                             &::after {
@@ -118,13 +105,13 @@
 
                     .ctrust-info {
                         position: relative;
-                        width: rem(22);
-                        height: rem(22);
+                        width: var(--ctrust-info-width, 1.5em);
+                        height: var(--ctrust-info-height, 1.5em);
                         cursor: pointer;
 
                         svg {
-                            width: rem(22);
-                            height: rem(22);
+                            width: var(--ctrust-info-svg-width, 1.5em);
+                            height: var(--ctrust-info-svg-height, 1.5em);
 
                             path {
                                 stroke: var(--ctrust-info-stroke, #ffffff);
@@ -137,9 +124,10 @@
                     display: none;
                     background-color: var(--ctrust-descr-bg, #323232);
                     color: var(--ctrust-descr-fg, #9d9d9d);
-                    padding: rem(15);
-                    font-size: rem(15);
-                    border-radius: rem(2);
+                    padding: var(--ctrust-decr-padding, 0.83em);
+                    font-size: var(--ctrust-descr-fontsize, 0.83em);
+                    line-height: var(--ctrust-descr-lineheight, 150%);
+                    border-radius: var(--ctrust-descr-br, rem(2));
                 }
 
                 .ctrust-descr-show {
@@ -153,15 +141,15 @@
             justify-content: flex-end;
             align-items: center;
             flex-wrap: wrap;
-            column-gap: rem(9);
-            row-gap: rem(9);
+            column-gap: var(--ctrust-actions-columngap, 0.5em);
+            row-gap: var(--ctrust-actions-rowgap, 0.5em);
 
             .ctrust-selected {
-                border-radius: rem(3);
-                border: rem(1) solid var(--ctrust-selectedbtn-border, #323232);
-                padding: rem(9) rem(18);
-                background-color: var(--ctrust-selectedbtn-bg, #43903a);
-                color: var(--ctrust-selectedbtn-fg, #151515);
+                border-radius: var(--ctrust-btn-selected-br, rem(3));
+                border: var(--ctrust-btn-selected-border, rem(1) solid #323232);
+                padding: var(--ctrust-btn-padding, 0.5em 1em);
+                background-color: var(--ctrust-btn-selected-bg, #43903a);
+                color: var(--ctrust-btn-selected-fg, #151515);
                 cursor: pointer;
 
                 @media not screen and (min-width: 768px) {
@@ -171,11 +159,11 @@
             }
 
             .ctrust-all {
-                border-radius: rem(3);
-                border: rem(1) solid var(--ctrust-allbtn-border, #323232);
-                background-color: var(--ctrust-allbtn-bg, #ffffff);
-                color: var(--ctrust-allbtn-fg, #000000);
-                padding: rem(9) rem(18);
+                border-radius: var(--ctrust-btn-all-br, rem(3));
+                border: var(--ctrust-btn-all-border, rem(1) solid #323232);
+                background-color: var(--ctrust-btn-all-bg, #ffffff);
+                color: var(--ctrust-btn-all-fg, #000000);
+                padding: var(--ctrust-btn-padding, 0.5em 1em);
                 cursor: pointer;
 
                 @media not screen and (min-width: 768px) {
@@ -194,11 +182,11 @@
 .ctrust-fingerprint {
     position: fixed;
     left: 0;
-    bottom: rem(18);
+    bottom: var(--ctrust-fingerprint-bottom, 1em);
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: rem(6) rem(9) rem(6) rem(18);
+    padding: var(--ctrust-fingerprint-padding, 0.35em 0.5em 0.35em 1em);
     background-color: var(--ctrust-fingerprint-bg, #282c32);
     border-top-right-radius: rem(3);
     border-bottom-right-radius: rem(3);
@@ -207,7 +195,7 @@
     z-index: 9998;
 
     &:hover {
-        padding: rem(6) rem(9) rem(6) rem(27);
+        padding: var(--ctrust-fingerprint-padding-hover, 0.35em 0.5em 0.35em 1.5em);
 
         svg path {
             stroke: var(----ctrust-fingerprint-stroke-hover, #43903a);
@@ -215,8 +203,8 @@
     }
 
     svg {
-        width: rem(24);
-        height: rem(24);
+        width: var(--ctrust-fingerprint-svg-width, 1.25em);
+        height: var(--ctrust-fingerprint-svg-height, 1.25em);
 
         path {
             stroke: var(--ctrust-fingerprint-stroke, #ffffff);
@@ -243,11 +231,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: calc(100% - rem(36));
-        height: calc(100% - rem(36));
+        width: calc(100% - 2em);
+        height: calc(100% - 2em);
         background-color: var(--ctrust-wrapper-bg, #000000);
         color: var(--ctrust-wrapper-fg, #ffffff);
-        padding: rem(18);
+        padding: 1em;
         z-index: -1;
     }
 }
