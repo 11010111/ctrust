@@ -48,7 +48,7 @@ import CTrust, { options } from './ctrust.min.js'
 CTrust(options)
 ```
 
-Möchte Sie das Modul um eigene Cookies erweitern, können Sie dies wie folgt tun.
+Möchten Sie das Modul um eigene Cookies erweitern, können Sie dies wie folgt tun.
 
 ```JAVASCRIPT
 import CTrust, { options } from './ctrust.min.js'
@@ -74,6 +74,59 @@ extendOptions.cookies.push(
 )
 
 CTrust(extendOptions)
+```
+
+Beachten Sie die Struktur der `options` Modul-Varible, wenn Sie diese bei der Konfiguration überschreiben wollen.
+
+```JSON
+{
+    intro: {
+        en: [
+            '<h1>Cookies</h1>',
+            '<p>We use cookies to provide ... .</p>'
+        ],
+        de: [
+            '<h1>Cookies</h1>',
+            '<p>Wir verwenden Cookies, ... .</p>'
+        ]
+    },
+    cookies: [
+        {
+            title: {
+                en: 'Necessary Cookies',
+                de: 'Erforderliche Cookies'
+            },
+            description: {
+                en: 'These cookies are necessary ... .',
+                de: 'Diese Cookies sind zur Funktion ... .'
+            },
+            checked: true,
+            disabled: true,
+            script: () => {
+                ...
+            },
+            keys: '_none1, _none2'
+        }
+    ],
+    actions: {
+        acceptAll: {
+            en: 'Accept all',
+            de: 'Alle akzeptieren',
+        },
+        acceptSelected: {
+            en: 'Accept selection',
+            de: 'Auswahl akzeptieren',
+        }
+    }
+}
+```
+
+Die Lokalisierung von CTrust wird aus dem `lang` Attribut des HTML-Tag gelesen und automatisch gesetzt. Ist eine Sprache nicht verfügbar, so wird die Default Sprache `en` gesetzt. Die `en` Lokalisierung muss in jedem Fall in Ihrer `options` für Texte vorhanden sein, damit CTrust einwandfrei funktiniert.
+
+```HMTL
+<html lang="en">
+    ...
+</html>
 ```
 
 ## CTrust Module
