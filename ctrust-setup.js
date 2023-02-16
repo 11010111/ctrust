@@ -13,7 +13,7 @@ extendOptions.cookies.push(
 		},
 		checked: true,
 		script: () => {
-            setTimeout(() => {
+			setTimeout(() => {
 				allow()
 			},100)
 		},

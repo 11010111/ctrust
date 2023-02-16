@@ -40,7 +40,7 @@ Ctrust bietet Ihnen die Möglichkein unkomliziert CSS Eigenschaften durch vordef
 ```
 ## CTrust Konfiguration
 
-Jede Ctrust Instanz müssen Sie mit dem Deafult Module `CTrust` und der Modul-Variable `options` initialisieren.
+Jede Ctrust Instanz müssen Sie mit dem Deafult Modul `CTrust` und der Modul-Variable `options` initialisieren.
 
 ```JAVASCRIPT
 import CTrust, { options } from './ctrust.min.js'
@@ -55,22 +55,22 @@ import CTrust, { options } from './ctrust.min.js'
 
 const extendOptions = options
 extendOptions.cookies.push(
-	{
-		title: { // Label des Cookies
-			en: 'Extern Media',
-			de: 'Externe Medien'
-		},
-		description: { // Beschreibung des Cookies
-			en: 'This is my extern media description.',
-			de: 'Dies ist meine Externe Medien Beschreibung.'
-		},
-		checked: true, // Aktiviert die Checkbox im initialen Zustand
+    {
+        title: { // Label des Cookies
+            en: 'Extern Media',
+            de: 'Externe Medien'
+        },
+        description: { // Beschreibung des Cookies
+            en: 'This is my extern media description.',
+            de: 'Dies ist meine Externe Medien Beschreibung.'
+        },
+        checked: true, // Aktiviert die Checkbox im initialen Zustand
         disabled: false, // Deaktiviert die Checkbox
-		script: () => {
+        script: () => {
             console.log('Extern Media Loaded...')
         } // Diese Script wird beim aktivieren des Cookie ausgeführt
-		keys: '_none' // Cookies die nach dem Abwählen gelöscht werden sollen
-	}
+        keys: '_none' // Cookies die nach dem Abwählen gelöscht werden sollen
+    }
 )
 
 CTrust(extendOptions)
