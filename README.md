@@ -12,7 +12,7 @@ In der Datei ctrust-setup.js finden Sie eine Beispiel-Konfiguration mit einen se
 
 Ctrust bietet Ihnen die Möglichkein unkomliziert CSS Eigenschaften durch vordefinierte CSS Variablen anzupassen. Hier ein Beispiel zu einigen verfügbaren Variablen:
 
-```SCSS
+```scss
 :root {
     --ctrust-bg: rgba(40, 44, 50, 0.8);
     --ctrust-banner-bg: #282c32;
@@ -42,7 +42,7 @@ Ctrust bietet Ihnen die Möglichkein unkomliziert CSS Eigenschaften durch vordef
 
 Jede CTrust Instanz müssen Sie mit dem Deafult Modul `CTrust` und der Modul-Variable `options` initialisieren.
 
-```JAVASCRIPT
+```javascript
 import CTrust, { options } from './ctrust.min.js'
 
 CTrust(options)
@@ -50,7 +50,7 @@ CTrust(options)
 
 Möchten Sie das Modul um eigene Cookies erweitern, können Sie dies wie folgt tun.
 
-```JAVASCRIPT
+```javascript
 import CTrust, { options } from './ctrust.min.js'
 
 const extendOptions = options
@@ -78,8 +78,8 @@ CTrust(extendOptions)
 
 Beachten Sie die Struktur der `options` Modul-Varible, wenn Sie diese bei der Konfiguration überschreiben wollen.
 
-```JSON
-{
+```javascript
+const options = {
     intro: {
         en: [
             '<h1>Cookies</h1>',
@@ -123,7 +123,7 @@ Beachten Sie die Struktur der `options` Modul-Varible, wenn Sie diese bei der Ko
 
 Die Lokalisierung von CTrust wird aus dem `lang` Attribut des HTML-Tag gelesen und automatisch gesetzt. Ist eine Sprache nicht verfügbar, so wird die Default Sprache `en` gesetzt. Die `en` Lokalisierung muss in jedem Fall in Ihrer `options` für Texte vorhanden sein, damit CTrust einwandfrei funktiniert.
 
-```HMTL
+```html
 <html lang="en">
     ...
 </html>
@@ -133,7 +133,7 @@ Die Lokalisierung von CTrust wird aus dem `lang` Attribut des HTML-Tag gelesen u
 
 Um eine Ausnahme zum Blocken der iFrames, Videos und Audios für einen Host zu definieren, importieren Sie die Modul-Funktion addHost und geben den Host als Parameter an die Funktion weiter.
 
-```JAVASCRIPT
+```javascript
 import { addHost } from './ctrust.min.js'
 
 // Somit werden alle Medien mit der URL nicht blockiert.
@@ -142,7 +142,7 @@ addHost('https://www.youtube-nocookie.com')
 
 Das Funktions-Modul `block`, blockt ohne Parameterübergabe alle iFrames. Möchten Sie Videos oder Audios blocken, so rufen Sie die Funktion `block` mit `video` oder `audio` als Paramater auf.
 
-```JAVASCRIPT
+```javascript
 import { block } from './ctrust.min.js'
 
 block() // Default iframes
@@ -152,7 +152,7 @@ block('audio') // Blockt Audios
 
 Wenn der Besucher eine Checkbox aktiviert und seine Auswahl bestätigt, wird der Script-Teil der Cookie-Optionen ausgeführt. Um zum Beispiel die Externen Medien nach dem Blocken zuladen, stellt Ihnen CTrust die Modul-Funktion `allow` bereit.
 
-```JAVASCRIPT
+```javascript
 import { allow } from './ctrust.min.js'
 
 allow()
@@ -162,7 +162,7 @@ allow('audio')
 
 CTrust stellt Ihnen auch die Modul-Funktion `setCookie` und `isCookieSet` bereit.
 
-```JAVASCRIPT
+```javascript
 import { setCookie, isCookieSet } from './ctrust.min.js'
 
 // Schreiben eines Cookies für die aktuelle Domain
