@@ -4,13 +4,13 @@
 
 CTrust ist ein ES6 modularer Cookie Banner und kann iFrames, Videos und Audios blocken. Zudem bietet CTrust die Möglichkeit Ausnahmen für Hosts zu konfigurieren, die vom Blocken der iFrames, Video, Audios ausgeschlossen werden sollen.
 
-## Wie binde ich CTrust ein?
+## CTrust Installation
 
-In der Datei ctrust-setup.js finden Sie eine Beispiel-Konfiguration mit einen selbst definierten Cookie. Die JavaScript Datei (in dem Fall ctrust-setup.js), muss im selben Verzeichnis wie die ctrust.min.js Library liegen und importiert alle notwendigen Module.
+In der Datei ctrust-setup.js finden Sie eine Beispiel-Konfiguration mit einen selbst definierten Cookie für Externe Medien. Die JavaScript Datei (in dem Fall ctrust-setup.js), muss im selben Verzeichnis wie die ctrust.min.js Library liegen und importiert alle notwendigen Module.
 
-## Kann ich CTrust ein eigenes Styling geben?
+## CTrust Styling
 
-Ja. Ctrust bietet Ihnen die Möglichkein unkomliziert die Farben durch CSS Variablen anzupassen. Hier ein Beispiel zu einigen CSS Variablen
+Ctrust bietet Ihnen die Möglichkein unkomliziert CSS Eigenschaften durch vordefinierte CSS Variablen anzupassen. Hier ein Beispiel zu einigen verfügbaren Variablen:
 
 ```SCSS
 :root {
@@ -38,19 +38,22 @@ Ja. Ctrust bietet Ihnen die Möglichkein unkomliziert die Farben durch CSS Varia
     ...
 }
 ```
-## Welche Module gibt es in CTrust?
+## CTrust Konfiguration
 
-CTrust bietet Ihnen folgende Module:
+Jede Ctrust Instanz müssen Sie mit dem Deafult Module `CTrust` und der Modul-Variable `options` initialisieren.
 
 ```JAVASCRIPT
 import CTrust, { options } from './ctrust.min.js'
 
-// In der Module Varibale options finden Sie die notwendigen Konfigurationen wie das Intro, Checkboxen und Beschreibungen, Button Labels.
-// Diese können Sie um eigene Optionen erweitern. Nutürlich steht Ihnen auch frei die Optionen zu überschreiben.
-const extendOptions = options
+CTrust(options)
+```
 
-// Hier ein Beispiel wie Sie CTrust um eine Option in Deutsch und Englisch erweitern.
-// Englisch wird bei CTrust als Standard Sprache behandelt und muss immer gegeben sein. 
+Möchte Sie das Modul um eigene Cookies erweitern, können Sie dies wie folgt tun.
+
+```JAVASCRIPT
+import CTrust, { options } from './ctrust.min.js'
+
+const extendOptions = options
 extendOptions.cookies.push(
 	{
 		title: { // Label des Cookies
@@ -63,15 +66,17 @@ extendOptions.cookies.push(
 		},
 		checked: true, // Aktiviert die Checkbox im initialen Zustand
         disabled: false, // Deaktiviert die Checkbox
-		script: 'window.ctrust.allow(); //window.ctrust.allow("video")', // Diese Script wird beim aktivieren des Cookie ausgeführt
+		script: () => {
+            console.log('Extern Media Loaded...')
+        } // Diese Script wird beim aktivieren des Cookie ausgeführt
 		keys: '_none' // Cookies die nach dem Abwählen gelöscht werden sollen
 	}
 )
 
-// Dies ist das Default-Modul um den Cookie Banner zu initialisieren.
-// Hierfür müssen Sie die CTrust Optionen übergeben.
 CTrust(extendOptions)
 ```
+
+## CTrust Module
 
 Um eine Ausnahme zum Blocken der iFrames, Videos und Audios für einen Host zu definieren, importieren Sie die Modul-Funktion addHost und geben den Host als Parameter an die Funktion weiter.
 
@@ -82,7 +87,7 @@ import { addHost } from './ctrust.min.js'
 addHost('https://www.youtube-nocookie.com')
 ```
 
-Das Funktions-Modul `block`, blockt ohne Parameterübergabe alle iFrames. Möchten Sie Videos der Audios blocken, so rufen Sie die Funktion `block` mit `video` oder `audio` als Paramater auf.
+Das Funktions-Modul `block`, blockt ohne Parameterübergabe alle iFrames. Möchten Sie Videos oder Audios blocken, so rufen Sie die Funktion `block` mit `video` oder `audio` als Paramater auf.
 
 ```JAVASCRIPT
 import { block } from './ctrust.min.js'
@@ -92,30 +97,29 @@ block('video') // Blockt Videos
 block('audio') // Blockt Audios
 ```
 
-Wenn der Besucher eine Checkbox aktiviert und seine Auswahl bestätigt, wird der Script-Teil der Cookie-Optionen (wie oben bei extendOptions gezeigt) ausgeführt. Damit die Funktion `allow` zum entblocken der Medien für diese Script erreichbar ist, binden wir diese an das vom Browser bereitgestellte `window` Objekt.
+Wenn der Besucher eine Checkbox aktiviert und seine Auswahl bestätigt, wird der Script-Teil der Cookie-Optionen ausgeführt. Um zum Beispiel die Externen Medien nach dem Blocken zuladen, stellt Ihnen CTrust die Modul-Funktion `allow` bereit.
 
 ```JAVASCRIPT
 import { allow } from './ctrust.min.js'
 
-// Zur besseren Übersicht erstellen wir ein Array Namens ctrust was unsere Funktionen enthalten wird
-window.ctrust = []
-window.ctrust.allow = allow // Hier wird die Funktion allow im ctrust Array unter dem selben Namen allow weitergereicht. Jetzt ist die Funktion von überall aus erreichbar und kann aus dem Script-Teil mit 'window.ctrust.allow()' aufgerufen werden.
+allow()
+allow('video')
+allow('audio')
 ```
 
-Um Cookies nach dem Deaktivieren der Checkboxen und der Bestätigung der Auswahl wieder zu löschen, stellt CTrust die Modul-Funktion `setCookie` zur Verfügung. Optional kann man mit `isCookieSet` vorher prüfen, ob ein Cookie gesetzt ist. Sie können diese Funktionen ebenso an das `window` Objekt binden und aus dem Script-Teil der Cookie Konfiguration aufrufen.
+CTrust stellt Ihnen auch die Modul-Funktion `setCookie` und `isCookieSet` bereit.
 
 ```JAVASCRIPT
 import { setCookie, isCookieSet } from './ctrust.min.js'
 
-// Zur besseren Übersicht erstellen wir ein Array Namens ctrust was unsere Funktionen enthalten wird
-window.ctrust = []
-window.ctrust.setCookie = setCookie
-window.ctrust.isCookieSet = isCookieSet
+// Schreiben eines Cookies für die aktuelle Domain
+// Der Domain Parameter ist hier Optional
+setCookie('_ga', 365, window.location.host)
 
 // Zum Löschen eines Cookies, muss der zweite Parameter -1 sein
 // Der dritte Parameter ist für die Domain reserviert und ist nur notwendig wenn Cookies mit Domain Spezifikation gesetzt wurden
-window.ctrust.setCookie('_ga', -1)
+setCookie('_ga', -1, window.location.host)
 
 // Um zu prüfen ob ein Cookie gesetzt ist, müssen Sie nur den Namen des Cookies als Parameter übergeben
-window.ctrust.isCookieSet('_ga')
+isCookieSet('_ga')
 ```

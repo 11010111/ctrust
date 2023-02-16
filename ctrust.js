@@ -25,9 +25,7 @@ const options = {
             },
             checked: true,
             disabled: true,
-            script: () => {
-                console.log("Necessary loaded.")
-            },
+            script: null,
             keys: '_none'
         }
     ],
