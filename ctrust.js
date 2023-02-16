@@ -93,7 +93,7 @@ const wrap = (element) => {
         const ctrust = document.querySelector('.ctrust')
         if (ctrust) ctrust.classList.add('ctrust-show')
     })
-    
+
     element.parentElement.replaceChild(wrapper, element)
     wrapper.appendChild(element)
 }
@@ -140,7 +140,7 @@ const block = (key = 'iframe') => {
 
 const allow = (key = 'iframe') => {
     const wrappers = document.querySelectorAll('.ctrust-wrapper')
-    
+
     wrappers.forEach(wrapper => {
         if (key === 'iframe') {
             const element = wrapper.querySelector(key)
@@ -182,12 +182,12 @@ const CTrust = (options) => {
 
     if (html) {
         const language = html.getAttribute('lang')
-        
+
         if (language) {
             lang = language.split('-')[0]
         }
     }
-    
+
     const banner = document.createElement('div')
     banner.className = 'ctrust-banner'
 
@@ -214,7 +214,7 @@ const CTrust = (options) => {
             if (cookie.hasOwnProperty('title')) {
                 label.innerText = cookie.title.hasOwnProperty(lang) ? cookie.title[lang] : cookie.title['en']
             }
-            
+
             label.htmlFor = 'ck' + index
 
             const check = document.createElement('input')
@@ -228,9 +228,9 @@ const CTrust = (options) => {
             const status = window.localStorage.getItem('_ct' + index)
 
             if (status) {
-                check.checked =  status === 'true' ? true : false
+                check.checked = status === 'true' ? true : false
             } else if (cookie.hasOwnProperty('checked')) {
-                check.checked =  cookie.checked
+                check.checked = cookie.checked
                 window.localStorage.setItem('_ct' + index, cookie.checked || 'false')
             }
 
@@ -262,7 +262,7 @@ const CTrust = (options) => {
                 head.appendChild(info)
                 element.appendChild(description)
             }
-            
+
             cookiesContainer.appendChild(element)
         })
 
@@ -283,10 +283,10 @@ const CTrust = (options) => {
         if (options.hasOwnProperty('cookies')) {
             options.cookies.forEach((cookie, index) => {
                 const status = window.localStorage.getItem('_ct' + index)
-    
+
                 if (status === 'true') {
                     const loaded = container.getAttribute('data-ct' + index)
-    
+
                     if (!loaded && cookie.hasOwnProperty('script') && typeof cookie.script === 'function') {
                         container.setAttribute('data-ct' + index, true)
                         cookie.script()
@@ -312,7 +312,7 @@ const CTrust = (options) => {
 
         window.localStorage.setItem('_ctrust', new Date())
         container.classList.remove('ctrust-show')
-        
+
         if (window.localStorage.getItem('_ctr')) {
             window.localStorage.removeItem('_ctr')
             window.location.reload()
@@ -330,11 +330,11 @@ const CTrust = (options) => {
         if (options.hasOwnProperty('cookies')) {
             options.cookies.forEach((cookie, index) => {
                 const check = document.querySelector('#ck' + index)
-    
+
                 if (check) {
                     check.checked = true
                     window.localStorage.setItem('_ct' + index, 'true')
-    
+
                     const loaded = container.getAttribute('data-ct' + index)
 
                     if (!loaded && cookie.hasOwnProperty('script') && typeof cookie.script === 'function') {
