@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "CTrust - Cookie Banner Library",
   "private": "true",
+  "type": "module",
   "main": "ctrust-setup.js",
   "scripts": {
     "minify": "uglifyjs ctrust.js > ctrust.min.js",
@@ -11,6 +12,12 @@
   "author": "Konstantin Schneider",
   "license": "ISC",
   "devDependencies": {
+    "eslint": "^8.34.0",
+    "eslint-config-semistandard": "^17.0.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.6.1",
+    "eslint-plugin-promise": "^6.1.1",
     "sass": "^1.58.1",
     "uglifyjs": "^2.4.11"
   }
