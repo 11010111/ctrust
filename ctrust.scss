@@ -3,6 +3,7 @@
 .ctrust-fingerprint {
     position: fixed;
     left: 0;
+    bottom: var(--ctrust-fingerprint-bottom, 1em);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -248,9 +249,4 @@
     &::after {
         content: "Externe Medien wurden blockiert.";
     }
-}
-
-.test {
-    top: 0;
-    position: absolute;
 }
