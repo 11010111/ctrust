@@ -7,7 +7,8 @@
   "main": "ctrust-setup.js",
   "scripts": {
     "minify": "uglifyjs ctrust.js > ctrust.min.js",
-    "watch": "sass . --watch --no-source-map --style=compressed"
+    "watch": "sass . --watch --no-source-map --style=compressed",
+    "lint": "stylelint '**/*.scss'"
   },
   "author": "Konstantin Schneider",
   "license": "ISC",
@@ -19,6 +20,10 @@
     "eslint-plugin-n": "^15.6.1",
     "eslint-plugin-promise": "^6.1.1",
     "sass": "^1.58.1",
+    "stylelint": "^15.1.0",
     "uglifyjs": "^2.4.11"
+  },
+  "dependencies": {
+    "stylelint-config-standard-scss": "^7.0.1"
   }
 }

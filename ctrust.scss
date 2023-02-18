@@ -1,5 +1,37 @@
-// ctrust
 @import "functions";
+
+.ctrust-fingerprint {
+    position: fixed;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--ctrust-fingerprint-padding, 0.35em 0.5em 0.35em 1em);
+    background-color: var(--ctrust-fingerprint-bg, #282c32);
+    border-top-right-radius: rem(3);
+    border-bottom-right-radius: rem(3);
+    cursor: pointer;
+    transition: padding 0.125s ease-in-out;
+    z-index: 9998;
+    bottom: 0;
+
+    svg {
+        width: var(--ctrust-fingerprint-svg-width, 1.25em);
+        height: var(--ctrust-fingerprint-svg-height, 1.25em);
+
+        path {
+            stroke: var(--ctrust-fingerprint-stroke, #fff);
+        }
+    }
+
+    &:hover {
+        padding: var(--ctrust-fingerprint-padding-hover, 0.35em 0.5em 0.35em 1.5em);
+
+        svg path {
+            stroke: var(--ctrust-fingerprint-stroke-hover, #43903a);
+        }
+    }
+}
 
 .ctrust {
     display: none;
@@ -9,7 +41,7 @@
     right: 0;
     bottom: 0;
     font-size: 16px;
-    background-color: var(--ctrust-bg, rgba(40, 44, 50, 0.8));
+    background-color: var(--ctrust-bg, rgba(40 44 50 / 80%));
     z-index: 9999;
 
     .ctrust-banner {
@@ -19,7 +51,7 @@
         display: grid;
         row-gap: var(--ctrust-banner-rowgap, 2em);
         background-color: var(--ctrust-banner-bg, #282c32);
-        color: var(--ctrust-banner-fg, #ffffff);
+        color: var(--ctrust-banner-fg, #fff);
         width: var(--ctrust-banner-width, calc(100% - 2em));
         max-width: var(--ctrust-banner-mw, rem(540));
         max-height: var(--ctrust-banner-mh, calc(100% - 2em));
@@ -71,7 +103,7 @@
                         place-content: center;
                         margin: 0;
                         padding: 0;
-                        background-color: var(--ctrust-check-bg, #ffffff);
+                        background-color: var(--ctrust-check-bg, #fff);
                         border: var(--ctrust-check-border, rem(2) solid #60656c);
                         border-radius: var(--ctrust-check-br, rem(2));
                         width: var(--ctrust-check-width, 1.5em);
@@ -114,7 +146,7 @@
                             height: var(--ctrust-info-svg-height, 1.5em);
 
                             path {
-                                stroke: var(--ctrust-info-stroke, #ffffff);
+                                stroke: var(--ctrust-info-stroke, #fff);
                             }
                         }
                     }
@@ -161,8 +193,8 @@
             .ctrust-all {
                 border-radius: var(--ctrust-btn-all-br, rem(3));
                 border: var(--ctrust-btn-all-border, rem(1) solid #323232);
-                background-color: var(--ctrust-btn-all-bg, #ffffff);
-                color: var(--ctrust-btn-all-fg, #000000);
+                background-color: var(--ctrust-btn-all-bg, #fff);
+                color: var(--ctrust-btn-all-fg, #000);
                 padding: var(--ctrust-btn-padding, 0.5em 1em);
                 cursor: pointer;
 
@@ -177,39 +209,6 @@
 
 .ctrust-show {
     display: block;
-}
-
-.ctrust-fingerprint {
-    position: fixed;
-    left: 0;
-    bottom: var(--ctrust-fingerprint-bottom, 1em);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: var(--ctrust-fingerprint-padding, 0.35em 0.5em 0.35em 1em);
-    background-color: var(--ctrust-fingerprint-bg, #282c32);
-    border-top-right-radius: rem(3);
-    border-bottom-right-radius: rem(3);
-    cursor: pointer;
-    transition: padding 0.125s ease-in-out;
-    z-index: 9998;
-
-    &:hover {
-        padding: var(--ctrust-fingerprint-padding-hover, 0.35em 0.5em 0.35em 1.5em);
-
-        svg path {
-            stroke: var(----ctrust-fingerprint-stroke-hover, #43903a);
-        }
-    }
-
-    svg {
-        width: var(--ctrust-fingerprint-svg-width, 1.25em);
-        height: var(--ctrust-fingerprint-svg-height, 1.25em);
-
-        path {
-            stroke: var(--ctrust-fingerprint-stroke, #ffffff);
-        }
-    }
 }
 
 .ctrust-wrapper {
@@ -233,8 +232,8 @@
         align-items: center;
         width: calc(100% - 2em);
         height: calc(100% - 2em);
-        background-color: var(--ctrust-wrapper-bg, #000000);
-        color: var(--ctrust-wrapper-fg, #ffffff);
+        background-color: var(--ctrust-wrapper-bg, #000);
+        color: var(--ctrust-wrapper-fg, #fff);
         padding: 1em;
         z-index: -1;
     }
@@ -250,4 +249,9 @@
     &::after {
         content: "Externe Medien wurden blockiert.";
     }
+}
+
+.test {
+    top: 0;
+    position: absolute;
 }
