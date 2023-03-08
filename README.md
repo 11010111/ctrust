@@ -76,7 +76,7 @@ extendOptions.cookies.push(
 CTrust(extendOptions)
 ```
 
-Beachten Sie die Struktur der `options` Modul-Varible, wenn Sie diese bei der Konfiguration überschreiben wollen.
+Beachten Sie die Struktur der `options` Modul-Variable, wenn Sie diese bei der Konfiguration überschreiben wollen.
 
 ```javascript
 const options = {
