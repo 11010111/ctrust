@@ -40,7 +40,7 @@ Ctrust bietet Ihnen die Möglichkein unkomliziert CSS Eigenschaften durch vordef
 ```
 ## CTrust Konfiguration
 
-Jede CTrust Instanz müssen Sie mit dem Deafult Modul `CTrust` und der Modul-Variable `options` initialisieren.
+Jede CTrust Instanz müssen Sie mit dem Default Modul `CTrust` und der Modul-Variable `options` initialisieren.
 
 ```javascript
 import CTrust, { options } from './ctrust.min.js'
