@@ -12,10 +12,10 @@ const stylesHandler = isProduction
 
 const config = {
   entry: {
-    ctrust: "./src/ctrust-setup.js"
+    ctrust: "./src/ctrust-setup.js",
   },
   output: {
-    filename: "[name].min.js",
+    filename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist"),
   },
   devServer: {

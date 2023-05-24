@@ -5,6 +5,8 @@
   "private": true,
   "main": "src/ctrust-setup.js",
   "scripts": {
+    "sass": "sass --watch . --style=compressed --no-source-map",
+    "ctrust:minify": "uglifyjs --compress --mangle -- ./src/ctrust.js > ./src/ctrust.min.js",
     "watch": "webpack --watch",
     "lint": "stylelint '**/*.scss'",
     "build": "webpack --mode=production --node-env=production",
@@ -33,6 +35,7 @@
     "stylelint-config-standard": "^30.0.1",
     "stylelint-config-standard-scss": "^7.0.1",
     "stylelint-scss": "^4.4.0",
+    "uglify-js": "^3.17.4",
     "webpack": "^5.84.0",
     "webpack-cli": "^5.1.1",
     "webpack-dev-server": "^4.13.1"

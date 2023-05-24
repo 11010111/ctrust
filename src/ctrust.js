@@ -1,6 +1,5 @@
-import './ctrust.scss'
-
 // CookieTrust
+
 const hosts = []
 
 const options = {
