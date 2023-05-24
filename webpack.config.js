@@ -11,8 +11,11 @@ const stylesHandler = isProduction
   : "style-loader";
 
 const config = {
-  entry: "./src/ctrust-setup.js",
+  entry: {
+    ctrust: "./src/ctrust-setup.js"
+  },
   output: {
+    filename: "[name].min.js",
     path: path.resolve(__dirname, "dist"),
   },
   devServer: {

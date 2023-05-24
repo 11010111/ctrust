@@ -1,4 +1,4 @@
-import CTrust, { allow, block, options } from './ctrust.min.js'
+import CTrust, { allow, block, options } from './ctrust.js'
 
 const extendOptions = options
 extendOptions.cookies.push(
