@@ -6,7 +6,7 @@ const options = {
   intro: {
     en: [
       '<h1>Cookies</h1>',
-      '<p>We use cookies to provide you with the best service and to keep improving it. If you click on "Accept all", you agree to the use of all cookies. If you click on "Accept selection", you only agree to the use of cookies in the categories you have selected. For more information, please see our <a href="/privacy>privacy policy</a>.".</p>'
+      '<p>We use cookies to provide you with the best service and to keep improving it. If you click on "Accept all", you agree to the use of all cookies. If you click on "Accept selection", you only agree to the use of cookies in the categories you have selected. For more information, please see our <a href="/privacy">privacy policy</a>.</p>'
     ],
     de: [
       '<h1>Cookies</h1>',
@@ -179,7 +179,7 @@ const CTrust = (options) => {
     const language = html.getAttribute('lang')
 
     if (language) {
-      lang = language.split('-')[0]
+      lang = language[0].toLowerCase() + language[1].toLowerCase()
     }
   }
 

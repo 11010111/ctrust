@@ -3,11 +3,11 @@
 .ctrust-fingerprint {
   position: fixed;
   left: 0;
-  bottom: var(--ctrust-fingerprint-bottom, 1em);
+  bottom: var(--ctrust-fingerprint-bottom, rem(20));
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: var(--ctrust-fingerprint-padding, 0.35em 0.5em 0.35em 1em);
+  padding: var(--ctrust-fingerprint-padding, rem(8) rem(8) rem(8) rem(16));
   background-color: var(--ctrust-fingerprint-bg, #282c32);
   border-top-right-radius: rem(3);
   border-bottom-right-radius: rem(3);
@@ -16,8 +16,8 @@
   z-index: 9998;
 
   svg {
-    width: var(--ctrust-fingerprint-svg-width, 1.25em);
-    height: var(--ctrust-fingerprint-svg-height, 1.25em);
+    width: var(--ctrust-fingerprint-svg-width, rem(20));
+    height: var(--ctrust-fingerprint-svg-height, rem(20));
 
     path {
       stroke: var(--ctrust-fingerprint-stroke, #fff);
@@ -25,7 +25,7 @@
   }
 
   &:hover {
-    padding: var(--ctrust-fingerprint-padding-hover, 0.35em 0.5em 0.35em 1.5em);
+    padding: var(--ctrust-fingerprint-padding-hover, rem(8) rem(8) rem(8) rem(24));
 
     svg path {
       stroke: var(--ctrust-fingerprint-stroke-hover, #43903a);
@@ -38,24 +38,24 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  bottom: 0;
   font-size: 16px;
   background-color: var(--ctrust-bg, rgb(40 44 52 / 80%));
   z-index: 9999;
 
   .ctrust-banner {
     position: fixed;
-    bottom: var(--ctrust-banner-bottom, 1.25em);
-    right: var(--ctrust-banner-right, 1.25em);
+    bottom: var(--ctrust-banner-bottom, rem(20));
+    right: var(--ctrust-banner-right, rem(20));
     display: grid;
-    row-gap: var(--ctrust-banner-rowgap, 2em);
+    grid-template-rows: 1fr auto auto;
+    row-gap: var(--ctrust-banner-rowgap, rem(32));
     background-color: var(--ctrust-banner-bg, #282c32);
     color: var(--ctrust-banner-fg, #fff);
-    width: var(--ctrust-banner-width, calc(100% - 2em));
+    width: var(--ctrust-banner-width, calc(100% - rem(106)));
     max-width: var(--ctrust-banner-mw, rem(540));
-    max-height: var(--ctrust-banner-mh, calc(100% - 2em));
-    padding: var(--ctrust-banner-padding, 1.5em 2em);
+    max-height: var(--ctrust-banner-mh, calc(100% - rem(90)));
+    padding: var(--ctrust-banner-padding, rem(24) rem(32));
     border-radius: var(--ctrust-banner-br, rem(3));
     overflow-y: auto;
 
@@ -66,12 +66,12 @@
       h4,
       h5,
       h6 {
-        margin: var(--ctrust-intro-h-margin, 0 0 1.5rem);
+        margin: var(--ctrust-intro-h-margin, 0 0 rem(24));
       }
 
       p {
         line-height: 150%;
-        margin: var(--ctrust-intro-p-margin, 0 0 1rem);
+        margin: var(--ctrust-intro-p-margin, 0 0 rem(16));
       }
 
       p:last-of-type {
@@ -90,17 +90,17 @@
 
     .ctrust-elements-wrapper {
       display: grid;
-      row-gap: var(--ctrust-ew-rowgap, 0.5em);
+      row-gap: var(--ctrust-ew-rowgap, rem(8));
 
       .ctrust-element {
         display: grid;
-        row-gap: var(--ctrust-el-rowgap, 0.5em);
+        row-gap: var(--ctrust-el-rowgap, rem(8));
 
         .ctrust-head {
           display: grid;
-          grid-template-columns: var(--ctrust-head-gtc, 1.5em 1fr 1.5em);
+          grid-template-columns: var(--ctrust-head-gtc, rem(24) 1fr rem(24));
           align-items: center;
-          column-gap: var(--ctrust-head-columngap, 1em);
+          column-gap: var(--ctrust-head-columngap, rem(16));
 
           input {
             appearance: none;
@@ -111,14 +111,14 @@
             background-color: var(--ctrust-check-bg, #fff);
             border: var(--ctrust-check-border, rem(2) solid #60656c);
             border-radius: var(--ctrust-check-br, rem(2));
-            width: var(--ctrust-check-width, 1.5em);
-            height: var(--ctrust-check-height, 1.5em);
+            width: var(--ctrust-check-width, rem(24));
+            height: var(--ctrust-check-height, rem(24));
             cursor: pointer;
 
             &::after {
               content: "";
-              width: var(--ctrust-check-after-width, 1em);
-              height: var(--ctrust-check-after-height, 1em);
+              width: var(--ctrust-check-after-width, rem(16));
+              height: var(--ctrust-check-after-height, rem(16));
               transform: scale(0);
               transition: 0.12s transform ease-in-out;
               background-color: var(--ctrust-check-checked, #43903a);
@@ -142,13 +142,13 @@
 
           .ctrust-info {
             position: relative;
-            width: var(--ctrust-info-width, 1.5em);
-            height: var(--ctrust-info-height, 1.5em);
+            width: var(--ctrust-info-width, rem(24));
+            height: var(--ctrust-info-height, rem(24));
             cursor: pointer;
 
             svg {
-              width: var(--ctrust-info-svg-width, 1.5em);
-              height: var(--ctrust-info-svg-height, 1.5em);
+              width: var(--ctrust-info-svg-width, rem(24));
+              height: var(--ctrust-info-svg-height, rem(24));
 
               path {
                 stroke: var(--ctrust-info-stroke, #fff);
@@ -161,8 +161,8 @@
           display: none;
           background-color: var(--ctrust-descr-bg, #323232);
           color: var(--ctrust-descr-fg, #9d9d9d);
-          padding: var(--ctrust-decr-padding, 0.83em);
-          font-size: var(--ctrust-descr-fontsize, 0.83em);
+          padding: var(--ctrust-decr-padding, rem(14));
+          font-size: var(--ctrust-descr-fontsize, rem(14));
           line-height: var(--ctrust-descr-lineheight, 150%);
           border-radius: var(--ctrust-descr-br, rem(2));
         }
@@ -178,13 +178,13 @@
       justify-content: flex-end;
       align-items: center;
       flex-wrap: wrap;
-      column-gap: var(--ctrust-actions-columngap, 0.5em);
-      row-gap: var(--ctrust-actions-rowgap, 0.5em);
+      column-gap: var(--ctrust-actions-columngap, rem(8));
+      row-gap: var(--ctrust-actions-rowgap, rem(8));
 
       .ctrust-selected {
         border-radius: var(--ctrust-btn-selected-br, rem(3));
         border: var(--ctrust-btn-selected-border, rem(1) solid #323232);
-        padding: var(--ctrust-btn-padding, 0.5em 1em);
+        padding: var(--ctrust-btn-padding, rem(8) rem(16));
         background-color: var(--ctrust-btn-selected-bg, #43903a);
         color: var(--ctrust-btn-selected-fg, #151515);
         cursor: pointer;
@@ -200,7 +200,7 @@
         border: var(--ctrust-btn-all-border, rem(1) solid #323232);
         background-color: var(--ctrust-btn-all-bg, #fff);
         color: var(--ctrust-btn-all-fg, #000);
-        padding: var(--ctrust-btn-padding, 0.5em 1em);
+        padding: var(--ctrust-btn-padding, rem(8) rem(16));
         cursor: pointer;
 
         @media not screen and (min-width: 768px) {
@@ -238,11 +238,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: calc(100% - 2em);
-    height: calc(100% - 2em);
+    width: calc(100% - rem(32));
+    height: calc(100% - rem(32));
     background-color: var(--ctrust-wrapper-bg, #000);
     color: var(--ctrust-wrapper-fg, #fff);
-    padding: 1em;
+    padding: rem(16);
     z-index: -1;
   }
 }
