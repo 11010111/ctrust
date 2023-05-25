@@ -6,7 +6,7 @@ CTrust ist ein ES6 modularer Cookie Banner und kann iFrames, Videos und Audios b
 
 ## CTrust Installation
 
-In der Datei ctrust-setup.js finden Sie eine Beispiel-Konfiguration mit einen selbst definierten Cookie für Externe Medien. Die JavaScript Datei (in dem Fall ctrust-setup.js), muss im selben Verzeichnis wie die ctrust.min.js Library liegen und importiert alle notwendigen Module.
+In der Datei ctrust-setup.js finden Sie eine Beispiel-Konfiguration mit einen selbst definierten Cookie für Externe Medien. Die JavaScript Datei (in dem Fall `src/ctrust-setup.js`), muss im selben Verzeichnis wie die `src/ctrust.min.js` Library liegen und importiert alle notwendigen Module.
 
 ## CTrust Styling
 
