@@ -68,7 +68,7 @@ extendOptions.cookies.push(
         disabled: false, // Deaktiviert die Checkbox
         script: () => {
             console.log('Extern Media Loaded...')
-        } // Diese Script wird beim aktivieren des Cookie ausgeführt
+        }, // Diese Script wird beim aktivieren des Cookie ausgeführt
         keys: '_none' // Cookies die nach dem Abwählen gelöscht werden sollen
     }
 )
