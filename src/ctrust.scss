@@ -221,6 +221,7 @@
   position: relative;
   background-color: transparent;
   cursor: pointer;
+  aspect-ratio: 16 / 9;
 
   iframe,
   img,
@@ -244,6 +245,7 @@
     color: var(--ctrust-wrapper-fg, #fff);
     padding: rem(16);
     z-index: -1;
+    border-radius: rem(4);
   }
 }
 
