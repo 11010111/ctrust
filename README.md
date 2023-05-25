@@ -4,9 +4,9 @@
 
 CTrust ist ein ES6 modularer Cookie Banner und kann iFrames, Videos und Audios blocken. Zudem bietet CTrust die Möglichkeit Ausnahmen für Hosts zu konfigurieren, die vom Blocken der iFrames, Video, Audios ausgeschlossen werden sollen.
 
-![CTrust dark](https://github.com/11010111/ctrust/tree/main/public/ctrust-dark.png)
+![CTrust dark](/public/ctrust-dark.png)
 
-![CTrust light](https://github.com/11010111/ctrust/tree/main/public/ctrust-light.png)
+![CTrust light](/public/ctrust-light.png)
 
 ## CTrust Installation
 
