@@ -1,4 +1,4 @@
-import CTrust, { allow, block, options } from './ctrust'
+import CTrust, { allow, block, options } from './ctrust.js'
 import './ctrust.scss'
 
 const extendOptions = options

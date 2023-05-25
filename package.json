@@ -1,8 +1,9 @@
 {
   "name": "ctrust",
   "version": "1.0.0",
-  "description": "CTrust - Cookie Banner",
-  "private": true,
+  "description": "CTrust - Cookie Banner Library",
+  "type": "module",
+  "private": "true",
   "main": "src/ctrust-setup.js",
   "scripts": {
     "sass": "sass --watch . --style=compressed --no-source-map",

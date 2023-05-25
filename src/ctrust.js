@@ -189,7 +189,7 @@ const CTrust = (options) => {
   if (options?.intro) {
     const intro = document.createElement('div')
     intro.className = 'ctrust-intro'
-    intro.innerHTML = options.intro?.lang ? options.intro[lang].join('') : options.intro.en.join('')
+    intro.innerHTML = options.intro.hasOwnProperty(lang) ? options.intro[lang].join('') : options.intro.en.join('')
     banner.appendChild(intro)
   }
 
@@ -207,7 +207,7 @@ const CTrust = (options) => {
       const label = document.createElement('label')
 
       if (cookie?.title) {
-        label.innerText = cookie.title?.lang ? cookie.title[lang] : cookie.title.en
+        label.innerText = cookie.title.hasOwnProperty(lang) ? cookie.title[lang] : cookie.title.en
       }
 
       label.htmlFor = 'ck' + index
@@ -244,7 +244,7 @@ const CTrust = (options) => {
       if (cookie?.description) {
         const description = document.createElement('div')
         description.className = 'ctrust-description'
-        description.innerHTML = cookie.description?.lang ? cookie.description[lang] : cookie.description.en
+        description.innerHTML = cookie.description.hasOwnProperty(lang) ? cookie.description[lang] : cookie.description.en
 
         const info = document.createElement('span')
         info.className = 'ctrust-info'
@@ -271,7 +271,7 @@ const CTrust = (options) => {
   saveAction.className = 'ctrust-selected'
 
   if (options?.actions && options.actions?.acceptSelected) {
-    saveAction.innerText = options.actions.acceptSelected?.lang ? options.actions.acceptSelected[lang] : options.actions.acceptSelected.en
+    saveAction.innerText = options.actions.acceptSelected.hasOwnProperty(lang) ? options.actions.acceptSelected[lang] : options.actions.acceptSelected.en
   }
 
   saveAction.addEventListener('click', () => {
@@ -318,7 +318,7 @@ const CTrust = (options) => {
   allAction.className = 'ctrust-all'
 
   if (options?.actions && options.actions?.acceptAll) {
-    allAction.innerText = options.actions.acceptAll?.lang ? options.actions.acceptAll[lang] : options.actions.acceptAll.en
+    allAction.innerText = options.actions.acceptAll.hasOwnProperty(lang) ? options.actions.acceptAll[lang] : options.actions.acceptAll.en
   }
 
   allAction.addEventListener('click', () => {
