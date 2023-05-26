@@ -7,7 +7,7 @@
   "main": "src/ctrust-setup.js",
   "scripts": {
     "sass": "sass --watch . --style=compressed --no-source-map",
-    "ctrust:minify": "uglifyjs --compress --mangle -- ./src/ctrust.js > ./src/ctrust.min.js",
+    "ctrust:minify": "uglifyjs ./src/ctrust.js --compress --mangle --output ./src/ctrust.min.js",
     "watch": "webpack --watch",
     "build": "webpack --mode=production --node-env=production",
     "build:dev": "webpack --mode=development",
