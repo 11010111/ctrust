@@ -14,32 +14,47 @@ In der Datei ctrust-setup.js finden Sie eine Beispiel-Konfiguration mit einen se
 
 ## CTrust Styling
 
-Ctrust bietet Ihnen die Möglichkein unkomliziert CSS Eigenschaften durch vordefinierte CSS Variablen anzupassen. Hier ein Beispiel zu einigen verfügbaren Variablen:
+Ctrust bietet Ihnen die Möglichkein unkomliziert CSS Eigenschaften durch vordefinierte CSS Variablen anzupassen. Hier ein Beispiel zu einigen verfügbaren Variablen in SCSS:
 
 ```scss
+@import "functions";
+
 :root {
-    --ctrust-bg: rgba(40, 44, 50, 0.8);
+  // Light-Theme
+  --ctrust-fingerprint-bg: #282c32;
+  --ctrust-fingerprint-stroke: #fff;
+  --ctrust-fingerprint-stroke-hover: #43903a;
+  --ctrust-bg: rgb(40 44 52 / 50%);
+  --ctrust-banner-bg: #fff;
+  --ctrust-banner-fg: #282c32;
+  --ctrust-info-stroke: #282c32;
+  --ctrust-descr-bg: #eee;
+  --ctrust-descr-fg: #282c32;
+  --ctrust-btn-selected-border: #{rem(1)} solid transparent;
+  --ctrust-btn-selected-bg: #43903a;
+  --ctrust-btn-selected-fg: #fff;
+  --ctrust-btn-selected-bg-hover: #48a53e;
+  --ctrust-btn-selected-fg-hover: #fff;
+  --ctrust-btn-all-border: #{rem(1)} solid transparent;
+  --ctrust-btn-all-bg: #282c32;
+  --ctrust-btn-all-fg: #fff;
+  --ctrust-btn-all-bg-hover: #30353d;
+  --ctrust-btn-all-fg-hover: #fff;
+
+  // Dark-Theme
+  @media (prefers-color-scheme: dark) {
     --ctrust-banner-bg: #282c32;
-    --ctrust-banner-fg: #ffffff;
-    --ctrust-check-bg: #ffffff;
-    --ctrust-check-border: #60656c;
-    --ctrust-check-checked: #43903a;
-    --ctrust-check-disabled: #60656c;
-    --ctrust-descr-bg: #323232;
-    --ctrust-descr-fg: #9d9d9d;
-    --ctrust-btn-selected-border: #323232;
+    --ctrust-banner-fg: #fff;
+    --ctrust-info-stroke: #fff;
+    --ctrust-descr-bg: #3b3e44;
+    --ctrust-descr-fg: #aaa;
     --ctrust-btn-selected-bg: #43903a;
-    --ctrust-btn-selected-fg: #151515;
-    --ctrust-btn-all-border: #323232;
-    --ctrust-btn-all-bg: #ffffff;
-    --ctrust-btn-all-fg: #000000;
-    --ctrust-info-stroke: #ffffff;
-    --ctrust-fingerprint-bg: #282c32;
-    --ctrust-fingerprint-stroke: #ffffff;
-    --ctrust-fingerprint-stroke-hover: #43903a;
-    --ctrust-wrapper-bg: #000000;
-    --ctrust-wrapper-fg: #ffffff;
-    ...
+    --ctrust-btn-selected-fg: #fff;
+    --ctrust-btn-all-bg: #fff;
+    --ctrust-btn-all-fg: #282c32;
+    --ctrust-btn-all-bg-hover: #eee;
+    --ctrust-btn-all-fg-hover: #282c32;
+  }
 }
 ```
 ## CTrust Konfiguration
