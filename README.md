@@ -73,7 +73,7 @@ Möchten Sie das Modul um eigene Cookies erweitern, können Sie dies wie folgt t
 import CTrust, { options } from './ctrust.min.js'
 
 const extendOptions = options
-extendOptions.cookies.push(
+extendOptions.inputs.push(
     {
         title: { // Label des Cookies
             en: 'Extern Media',
@@ -88,7 +88,7 @@ extendOptions.cookies.push(
         script: () => {
             console.log('Extern Media Loaded...')
         }, // Diese Script wird beim aktivieren des Cookie ausgeführt
-        keys: '_none' // Cookies die nach dem Abwählen gelöscht werden sollen
+        cookies: '_none' // Cookies die nach dem Abwählen gelöscht werden sollen
     }
 )
 
@@ -109,7 +109,7 @@ const options = {
             '<p>Wir verwenden Cookies, ... .</p>'
         ]
     },
-    cookies: [
+    inputs: [
         {
             title: {
                 en: 'Necessary Cookies',
@@ -124,7 +124,7 @@ const options = {
             script: () => {
                 ...
             },
-            keys: '_none1, _none2'
+            cookies: '_none1, _none2'
         }
     ],
     actions: {
