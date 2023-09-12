@@ -2,7 +2,7 @@ import CTrust, { allow, block, options } from './ctrust.min.js'
 import './ctrust.scss'
 
 const extendOptions = options
-extendOptions.cookies.push(
+extendOptions.inputs.push(
   {
     title: {
       en: 'Extern Media',
@@ -18,7 +18,7 @@ extendOptions.cookies.push(
         allow()
       }, 100)
     },
-    keys: '_none'
+    cookies: '_none'
   }
 )
 

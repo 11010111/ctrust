@@ -13,7 +13,7 @@ const options = {
       '<p>Wir verwenden Cookies, um Ihnen einen optimalen Service anzubieten und diesen immer weiter zu verbessern. Wenn Sie auf „Alle akzeptieren“ klicken, stimmen Sie der Verwendung aller Cookies zu. Wenn Sie auf „Auswahl akzeptieren“ klicken, erklären Sie sich nur mit der Verwendung von Cookies in den von Ihnen ausgewählten Kategorien einverstanden. Weitere Informationen finden Sie in unserer <a href="/datenschutz">Datenschutzerklärung</a>.</p>'
     ]
   },
-  cookies: [
+  inputs: [
     {
       title: {
         en: 'Necessary Cookies',
@@ -26,7 +26,7 @@ const options = {
       checked: true,
       disabled: true,
       script: null,
-      keys: '_none'
+      cookies: '_none'
     }
   ],
   actions: {
@@ -193,11 +193,11 @@ const CTrust = (options) => {
     banner.appendChild(intro)
   }
 
-  if (options?.cookies) {
+  if (options?.inputs) {
     const cookiesContainer = document.createElement('div')
     cookiesContainer.className = 'ctrust-elements-wrapper'
 
-    options.cookies.forEach((cookie, index) => {
+    options.inputs.forEach((input, index) => {
       const element = document.createElement('div')
       element.className = 'ctrust-element'
 
@@ -206,8 +206,8 @@ const CTrust = (options) => {
 
       const label = document.createElement('label')
 
-      if (cookie?.title) {
-        label.innerText = cookie.title.hasOwnProperty(lang) ? cookie.title[lang] : cookie.title.en
+      if (input?.title) {
+        label.innerText = input.title.hasOwnProperty(lang) ? input.title[lang] : input.title.en
       }
 
       label.htmlFor = 'ck' + index
@@ -216,17 +216,17 @@ const CTrust = (options) => {
       check.type = 'checkbox'
       check.id = 'ck' + index
 
-      if (cookie?.disabled) {
-        check.disabled = cookie.disabled === true
+      if (input?.disabled) {
+        check.disabled = input.disabled === true
       }
 
       const status = window.localStorage.getItem('_ct' + index)
 
       if (status) {
         check.checked = status === 'true'
-      } else if (cookie?.checked) {
-        check.checked = cookie.checked
-        window.localStorage.setItem('_ct' + index, cookie.checked || 'false')
+      } else if (input?.checked) {
+        check.checked = input.checked
+        window.localStorage.setItem('_ct' + index, input.checked || 'false')
       }
 
       check.addEventListener('change', () => {
@@ -241,10 +241,10 @@ const CTrust = (options) => {
       head.appendChild(label)
       element.appendChild(head)
 
-      if (cookie?.description) {
+      if (input?.description) {
         const description = document.createElement('div')
         description.className = 'ctrust-description'
-        description.innerHTML = cookie.description.hasOwnProperty(lang) ? cookie.description[lang] : cookie.description.en
+        description.innerHTML = input.description.hasOwnProperty(lang) ? input.description[lang] : input.description.en
 
         const info = document.createElement('span')
         info.className = 'ctrust-info'
@@ -275,16 +275,16 @@ const CTrust = (options) => {
   }
 
   saveAction.addEventListener('click', () => {
-    if (options?.cookies) {
-      options.cookies.forEach((cookie, index) => {
+    if (options?.inputs) {
+      options.inputs.forEach((input, index) => {
         const status = window.localStorage.getItem('_ct' + index)
 
         if (status === 'true') {
           const loaded = container.getAttribute('data-ct' + index)
 
-          if (!loaded && cookie?.script && typeof cookie.script === 'function') {
+          if (!loaded && input?.script && typeof input.script === 'function') {
             container.setAttribute('data-ct' + index, true)
-            cookie.script()
+            input.script()
           }
         } else {
           const loaded = container.getAttribute('data-ct' + index)
@@ -293,10 +293,10 @@ const CTrust = (options) => {
             container.setAttribute('data-ct' + index, '')
             window.localStorage.setItem('_ctr', new Date())
 
-            if (cookie?.keys) {
-              const keys = cookie.keys.split(',')
+            if (input?.cookies) {
+              const cookies = input.cookies.split(',')
 
-              keys.forEach(key => {
+              cookies.forEach(key => {
                 setCookie(key.trim(), -1)
               })
             }
@@ -322,8 +322,8 @@ const CTrust = (options) => {
   }
 
   allAction.addEventListener('click', () => {
-    if (options?.cookies) {
-      options.cookies.forEach((cookie, index) => {
+    if (options?.inputs) {
+      options.inputs.forEach((input, index) => {
         const check = document.querySelector('#ck' + index)
 
         if (check) {
@@ -332,9 +332,9 @@ const CTrust = (options) => {
 
           const loaded = container.getAttribute('data-ct' + index)
 
-          if (!loaded && cookie?.script && typeof cookie.script === 'function') {
+          if (!loaded && input?.script && typeof input.script === 'function') {
             container.setAttribute('data-ct' + index, true)
-            cookie.script()
+            input.script()
           }
         }
       })
