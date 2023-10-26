@@ -172,32 +172,42 @@ const CTrust = (options) => {
 
   const container = document.createElement('div')
   container.className = 'ctrust'
-  const html = document.querySelector('html')
-  let lang = 'en'
 
-  if (html) {
-    const language = html.getAttribute('lang')
+  let lang = ['en']
+  let isBot = false
+  const { intro, inputs, actions: { acceptSelected, acceptAll } } = options
+  const language = document.documentElement.lang
+  const userAgents = [
+    'googlebot',
+    'googleother',
+    'storebot',
+    'bingbot',
+    'linkedinbot',
+    'yandex',
+    'insights'
+  ]
 
-    if (language) {
-      lang = language[0].toLowerCase() + language[1].toLowerCase()
-    }
+  if (language) {
+    lang = language.split('-')
   }
 
   const banner = document.createElement('div')
   banner.className = 'ctrust-banner'
 
-  if (options?.intro) {
-    const intro = document.createElement('div')
-    intro.className = 'ctrust-intro'
-    intro.innerHTML = options.intro.hasOwnProperty(lang) ? options.intro[lang].join('') : options.intro.en.join('')
-    banner.appendChild(intro)
+  if (intro) {
+    const introField = document.createElement('div')
+    introField.className = 'ctrust-intro'
+    introField.innerHTML = intro[lang[0]].join('') ?? intro.en.join('')
+    banner.appendChild(introField)
   }
 
-  if (options?.inputs) {
+  if (inputs) {
     const cookiesContainer = document.createElement('div')
     cookiesContainer.className = 'ctrust-elements-wrapper'
 
-    options.inputs.forEach((input, index) => {
+    inputs.forEach((input, index) => {
+      const { title, disabled, checked, description } = input
+
       const element = document.createElement('div')
       element.className = 'ctrust-element'
 
@@ -206,8 +216,8 @@ const CTrust = (options) => {
 
       const label = document.createElement('label')
 
-      if (input?.title) {
-        label.innerText = input.title.hasOwnProperty(lang) ? input.title[lang] : input.title.en
+      if (title) {
+        label.innerText = title[lang[0]] ?? title.en
       }
 
       label.htmlFor = 'ck' + index
@@ -216,17 +226,17 @@ const CTrust = (options) => {
       check.type = 'checkbox'
       check.id = 'ck' + index
 
-      if (input?.disabled) {
-        check.disabled = input.disabled === true
+      if (disabled) {
+        check.disabled = disabled === true ? true : false
       }
 
       const status = window.localStorage.getItem('_ct' + index)
 
       if (status) {
         check.checked = status === 'true'
-      } else if (input?.checked) {
-        check.checked = input.checked
-        window.localStorage.setItem('_ct' + index, input.checked || 'false')
+      } else if (checked) {
+        check.checked = checked === true
+        window.localStorage.setItem('_ct' + index, checked || 'false')
       }
 
       check.addEventListener('change', () => {
@@ -241,21 +251,21 @@ const CTrust = (options) => {
       head.appendChild(label)
       element.appendChild(head)
 
-      if (input?.description) {
-        const description = document.createElement('div')
-        description.className = 'ctrust-description'
-        description.innerHTML = input.description.hasOwnProperty(lang) ? input.description[lang] : input.description.en
+      if (description) {
+        const descriptionField = document.createElement('div')
+        descriptionField.className = 'ctrust-description'
+        descriptionField.innerHTML = description[lang[0]] ?? description.en
 
         const info = document.createElement('span')
         info.className = 'ctrust-info'
         info.innerHTML = '<svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"></path></svg>'
 
         info.addEventListener('click', () => {
-          description.classList.toggle('ctrust-descr-show')
+          descriptionField.classList.toggle('ctrust-descr-show')
         })
 
         head.appendChild(info)
-        element.appendChild(description)
+        element.appendChild(descriptionField)
       }
 
       cookiesContainer.appendChild(element)
@@ -264,27 +274,28 @@ const CTrust = (options) => {
     banner.appendChild(cookiesContainer)
   }
 
-  const actions = document.createElement('div')
-  actions.className = 'ctrust-actions'
+  const actionsWrapper = document.createElement('div')
+  actionsWrapper.className = 'ctrust-actions'
 
   const saveAction = document.createElement('button')
   saveAction.className = 'ctrust-selected'
 
-  if (options?.actions && options.actions?.acceptSelected) {
-    saveAction.innerText = options.actions.acceptSelected.hasOwnProperty(lang) ? options.actions.acceptSelected[lang] : options.actions.acceptSelected.en
+  if (acceptSelected) {
+    saveAction.innerText = acceptSelected[lang[0]] ?? acceptSelected.en
   }
 
   saveAction.addEventListener('click', () => {
-    if (options?.inputs) {
-      options.inputs.forEach((input, index) => {
+    if (inputs) {
+      inputs.forEach((input, index) => {
+        const { script, cookies } = input
         const status = window.localStorage.getItem('_ct' + index)
 
         if (status === 'true') {
           const loaded = container.getAttribute('data-ct' + index)
 
-          if (!loaded && input?.script && typeof input.script === 'function') {
+          if (!loaded && script && typeof script === 'function') {
             container.setAttribute('data-ct' + index, true)
-            input.script()
+            script()
           }
         } else {
           const loaded = container.getAttribute('data-ct' + index)
@@ -293,10 +304,10 @@ const CTrust = (options) => {
             container.setAttribute('data-ct' + index, '')
             window.localStorage.setItem('_ctr', new Date())
 
-            if (input?.cookies) {
-              const cookies = input.cookies.split(',')
+            if (cookies) {
+              const removeCookies = cookies.split(',')
 
-              cookies.forEach(key => {
+              removeCookies.forEach(key => {
                 setCookie(key.trim(), -1)
               })
             }
@@ -317,13 +328,14 @@ const CTrust = (options) => {
   const allAction = document.createElement('button')
   allAction.className = 'ctrust-all'
 
-  if (options?.actions && options.actions?.acceptAll) {
-    allAction.innerText = options.actions.acceptAll.hasOwnProperty(lang) ? options.actions.acceptAll[lang] : options.actions.acceptAll.en
+  if (acceptAll) {
+    allAction.innerText = acceptAll[lang[0]] ?? acceptAll.en
   }
 
   allAction.addEventListener('click', () => {
-    if (options?.inputs) {
-      options.inputs.forEach((input, index) => {
+    if (inputs) {
+      inputs.forEach((input, index) => {
+        const { script } = input
         const check = document.querySelector('#ck' + index)
 
         if (check) {
@@ -332,9 +344,9 @@ const CTrust = (options) => {
 
           const loaded = container.getAttribute('data-ct' + index)
 
-          if (!loaded && input?.script && typeof input.script === 'function') {
+          if (!loaded && script && typeof script === 'function') {
             container.setAttribute('data-ct' + index, true)
-            input.script()
+            script()
           }
         }
       })
@@ -344,10 +356,21 @@ const CTrust = (options) => {
     container.classList.remove('ctrust-show')
   })
 
-  actions.appendChild(saveAction)
-  actions.appendChild(allAction)
-  banner.appendChild(actions)
+  actionsWrapper.appendChild(saveAction)
+  actionsWrapper.appendChild(allAction)
+  banner.appendChild(actionsWrapper)
   container.appendChild(banner)
+
+  userAgents.forEach(userAgent => {
+    const lowerUserAgent = navigator.userAgent.toLowerCase()
+
+    if (lowerUserAgent.indexOf(userAgent.toLowerCase()) >= 0) {
+      isBot = true
+    }
+  })
+
+  if (isBot) return
+
   document.body.appendChild(container)
 
   const visited = window.localStorage.getItem('_ctrust')

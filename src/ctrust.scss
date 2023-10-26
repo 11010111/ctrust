@@ -3,7 +3,7 @@
 :root {
   --ctrust-fingerprint-bg: #282c32;
   --ctrust-fingerprint-stroke: #fff;
-  --ctrust-fingerprint-stroke-hover: #43903a;
+  --ctrust-fingerprint-stroke-hover: #5cd64f;
   --ctrust-bg: rgb(40 44 52 / 50%);
   --ctrust-banner-bg: #fff;
   --ctrust-banner-fg: #282c32;
@@ -11,15 +11,15 @@
   --ctrust-descr-bg: #eee;
   --ctrust-descr-fg: #282c32;
   --ctrust-btn-selected-border: #{rem(1)} solid transparent;
-  --ctrust-btn-selected-bg: #43903a;
-  --ctrust-btn-selected-fg: #fff;
-  --ctrust-btn-selected-bg-hover: #48a53e;
-  --ctrust-btn-selected-fg-hover: #fff;
+  --ctrust-btn-selected-bg: #48a53e;
+  --ctrust-btn-selected-fg: #151515;
+  --ctrust-btn-selected-bg-hover: #5cd64f;
+  --ctrust-btn-selected-fg-hover: #151515;
   --ctrust-btn-all-border: #{rem(1)} solid transparent;
-  --ctrust-btn-all-bg: #282c32;
-  --ctrust-btn-all-fg: #fff;
-  --ctrust-btn-all-bg-hover: #30353d;
-  --ctrust-btn-all-fg-hover: #fff;
+  --ctrust-btn-all-bg: #48a53e;
+  --ctrust-btn-all-fg: #151515;
+  --ctrust-btn-all-bg-hover: #5cd64f;
+  --ctrust-btn-all-fg-hover: #151515;
 
   @media (prefers-color-scheme: dark) {
     --ctrust-banner-bg: #282c32;
@@ -27,12 +27,12 @@
     --ctrust-info-stroke: #fff;
     --ctrust-descr-bg: #3b3e44;
     --ctrust-descr-fg: #aaa;
-    --ctrust-btn-selected-bg: #43903a;
-    --ctrust-btn-selected-fg: #fff;
-    --ctrust-btn-all-bg: #fff;
-    --ctrust-btn-all-fg: #282c32;
-    --ctrust-btn-all-bg-hover: #eee;
-    --ctrust-btn-all-fg-hover: #282c32;
+    --ctrust-btn-selected-bg: #48a53e;
+    --ctrust-btn-selected-fg: #151515;
+    --ctrust-btn-all-bg: #4da643;
+    --ctrust-btn-all-fg: #151515;
+    --ctrust-btn-all-bg-hover: #5cd64f;
+    --ctrust-btn-all-fg-hover: #151515;
   }
 }
 
@@ -117,7 +117,7 @@
 
       a {
         text-decoration: none;
-        color: var(--ctrust-intro-link-color, #43903a);
+        color: var(--ctrust-intro-link-color, #4da643);
 
         &:hover {
           text-decoration: underline;
@@ -158,7 +158,7 @@
               height: var(--ctrust-check-after-height, rem(16));
               transform: scale(0);
               transition: 0.12s transform ease-in-out;
-              background-color: var(--ctrust-check-checked, #43903a);
+              background-color: var(--ctrust-check-checked, #4da643);
             }
 
             &:checked {
